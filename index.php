@@ -3,7 +3,7 @@
 Plugin Name: Stripe Donations
 Plugin URI: https://uproot.us/
 Description: Accept donations on your site using Stripe.
-Version: 1.0.0
+Version: 1.0.1
 Author: Matt Gibbs
 Author URI: https://uproot.us/
 License: GPL2
@@ -128,6 +128,8 @@ class StripeDonations
     ============================================================*/
 
     function shortcode($atts) {
+        ob_start();
+
         $amount = isset($atts['amount']) ? $atts['amount'] : '1000';
     ?>
     <script>
@@ -151,6 +153,7 @@ class StripeDonations
         data-amount="<?php echo $amount; ?>"
         data-label="Donate"></script>
     <?php
+        return ob_get_clean();
     }
 
     /*============================================================

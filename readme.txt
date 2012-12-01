@@ -1,4 +1,4 @@
-=== Stripe Donation ===
+=== Stripe Donations ===
 Contributors: logikal16
 Donate link: https://uproot.us/donate/
 Tags: donation, donate, stripe, payment
@@ -19,6 +19,9 @@ Accept donations on your site using the Stripe Button.
 2. Browse to `Settings > Stripe Donations` and enter your Stripe keys.
 
 == Changelog ==
+
+= 1.0.1 =
+* Return shortcode output instead of outputting directly
 
 = 1.0.0 =
 * Initial release
