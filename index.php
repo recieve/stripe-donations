@@ -3,7 +3,7 @@
 Plugin Name: Stripe Donations
 Plugin URI: https://uproot.us/
 Description: Accept donations on your site using Stripe.
-Version: 1.0.1
+Version: 1.0.2
 Author: Matt Gibbs
 Author URI: https://uproot.us/
 License: GPL2
@@ -132,6 +132,13 @@ class StripeDonations
 
         $amount = isset($atts['amount']) ? $atts['amount'] : '1000';
     ?>
+    <style>
+    .donate-loading {
+        width: 24px;
+        height: 24px;
+        background: url('<?php echo $this->url; ?>/images/loading.gif') no-repeat;
+    }
+    </style>
     <script>
     (function($) {
         $(function() {
@@ -141,8 +148,10 @@ class StripeDonations
                     'token': token.id,
                     'amount': $(this).attr('data-amount')
                 };
+                $('.stripe-button-inner').hide();
+                $('.donate-response').html('<div class="donate-loading"></div>');
                 $.post('<?php echo admin_url('admin-ajax.php'); ?>', data, function(response) {
-                    console.log(response);
+                    $('.donate-response').html(response);
                 });
             });
         });
@@ -152,6 +161,7 @@ class StripeDonations
         data-key="<?php echo $this->options['publishable_key']; ?>"
         data-amount="<?php echo $amount; ?>"
         data-label="Donate"></script>
+        <div class="donate-response"></div>
     <?php
         return ob_get_clean();
     }
@@ -177,11 +187,17 @@ class StripeDonations
     function submit_payment() {
         $token = isset($_POST['token']) ? $_POST['token'] : '';
         $amount = isset($_POST['amount']) ? $_POST['amount'] : 0;
-        $charge = Stripe_Charge::create(array(
-            'card' => $token,
-            'amount' => $amount,
-            'currency' => 'usd',
-        ));
-        exit;
+        try {
+            $charge = Stripe_Charge::create(array(
+                'card' => $token,
+                'amount' => $amount,
+                'currency' => 'usd',
+            ));
+        }
+        catch (Stripe_Error $e) {
+            die($e->getMessage());
+        }
+
+        die('Your payment has been sent. Thank you for your donation!');
     }
 }

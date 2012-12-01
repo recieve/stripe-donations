@@ -21,9 +21,14 @@ Browse to [https://uproot.us/projects/stripe-donations/](https://uproot.us/proje
 2. Browse to `Settings > Stripe Donations` and enter your Stripe keys.
 3. Add `[ssd]` or `[ssd amount="500"]` to your pages!
 
-Note that the donation amount is in pennies. For a $5 donation, the shortcode amount is `500`. For $25, the amount is `2500`.
+Note that the donation amount uses cents. For a $5 donation, the shortcode amount is `500`. For $25, the amount is `2500`.
 
 == Changelog ==
+
+= 1.0.2 =
+* Exception handling
+* Added a confirmation message
+* Added a loading icon when processing
 
 = 1.0.1 =
 * Return shortcode output instead of outputting directly
