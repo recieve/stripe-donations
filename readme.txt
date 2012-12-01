@@ -13,10 +13,15 @@ Accept donations on your site using the Stripe Button.
 
 Accept donations on your site using the Stripe Button.
 
+Browse to [https://uproot.us/projects/stripe-donations/](https://uproot.us/projects/stripe-donations/) for more information.
+
 == Installation ==
 
 1. Download and activate the plugin.
 2. Browse to `Settings > Stripe Donations` and enter your Stripe keys.
+3. Add `[ssd]` or `[ssd amount="500"]` to your pages!
+
+Note that the donation amount is in pennies. For a $5 donation, the shortcode amount is `500`. For $25, the amount is `2500`.
 
 == Changelog ==
 
